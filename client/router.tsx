@@ -5,12 +5,13 @@ import {
 } from 'react-router-dom'
 import Home from './components/Home'
 import App from './components/App'
-import Blue from './components/Blue'
+import SVGbuttons from './components/SVGbuttons'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<Home />} />
+      <Route path="buttontest" element={<SVGbuttons />} />
     </Route>
   )
 )

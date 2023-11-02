@@ -1,5 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: #faf8f1;
-  color: #0a1520;
-  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #452572;
+  color: #FFF;
+  font-family: 'Ubuntu Mono', monospace;
+  text-align: center;
+}
+
+.titles {
+  font-size: 32px;
+}
+
+.content-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  height: 94vh;
+}
+
+.svg-container {
+  height: 60%;}
+
+.fill-red {
+  fill: #ff1653;
+}
+
+.fill-yellow {
+  fill: #ffbd00;
+}
+
+.fill-green {
+  fill: #1ec9cd;
+}
+
+.fill-blue {
+  fill: #99c1e9;
+}
+
+.overlay {
+  fill: none;
+}
+
+.overlay:hover {
+  fill: #000;
+}
+
+.button:hover + .overlay {
+  fill: #000;
+}
+
+.active-shadow {
+  filter: none;
+}
+
+.active-shadow:hover {
+  filter: url(#drop-shadow);
+}
+
+.overlay:hover + #yellow {
+  filter: url(#drop-shadow);
 }
