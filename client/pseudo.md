@@ -39,3 +39,11 @@ First the PC will show a preset pattern of the colored squares. Then the player 
 ## UI
 
 - Wins and losses could be displayed in the upper right corner of the screen
+
+## Managing State
+
+- In reviewing the [React Docs](https://react.dev/learn/sharing-state-between-components) on managing state between components
+  - we will need to have the parent component (App) manage the state (so called 'single source of truth')
+  - the parent will pass event handlers as props to the child components.
+  - This will allow the child components to set the state in the parent - add the button press to the response array
+- Most of the functionality would be in the parent
