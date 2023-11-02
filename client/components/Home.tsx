@@ -1,8 +1,12 @@
-import Red from './Red'
-import Yellow from './Yellow'
-import Green from './Green'
-import Blue from './Blue'
 import Color from './Color'
+
+const color: string[] = ['red', 'green', 'yellow', 'blue']
+const player: string[] = []
+const pc: string[] = []
+function getRandomColor(array: string[]) {
+  return array.push(color[Math.floor(Math.random() * color.length - 1)])
+}
+console.log(getRandomColor(pc))
 
 function Home() {
   return (
