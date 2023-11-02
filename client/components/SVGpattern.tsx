@@ -7,13 +7,22 @@ function SVGpattern() {
   const colourArrayString = colourArray.join(', ')
 
   const flashingPattern = () => {
-    for (let i = 0; i < colourArray.length; i++) {
-      console.log(colourArray[i])
-      setTimeout(flashingPattern, 1000)
+    let i = 0
+    
+    const loop = () => {
+      if (i < colourArray.length) {
+        console.log(colourArray[i])
+        i++
+        //// update class to show pattern
+        setTimeout(loop, 1000) // Wait for 2 seconds (2000 milliseconds) before the next iteration
+      }
     }
+  
+    loop() // Start the loop
   }
-
-  flashingPattern()
+  
+  flashingPattern();
+  
 
   return (
     <div className='content-stack'>
