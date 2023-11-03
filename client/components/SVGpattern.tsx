@@ -1,19 +1,121 @@
+import { useEffect, useState } from 'react'
 
 function SVGpattern() {
+
   const colourArray = ['Red', 'Yellow', 'Blue', 'Green']
   // console.log(colourArray)
   // console.log("Test")
 
+  const [redActive, setRedActive] = useState(false)
+  const [yellowActive, setYellowActive] = useState(false)
+  const [greenActive, setGreenActive] = useState(false)
+  const [blueActive, setBlueActive] = useState(false)
+
   const colourArrayString = colourArray.join(', ')
 
-  const flashingPattern = () => {
-    for (let i = 0; i < colourArray.length; i++) {
-      console.log(colourArray[i])
-      setTimeout(flashingPattern, 1000)
-    }
+  //   let i = 0
+  // if (i < colourArray.length) {
+  //  console.log(colourArray[i])
+  //  i++
+      // setTimeout(()=> {}, 1000) // wait for 1 second
+
+      // setRedActive(false)
+      //   setYellowActive(false)
+      //   setGreenActive(false)
+      //   setBlueActive(false)
+
+  //       let i = 0
+  // if (i < colourArray.length) {
+  //  console.log(colourArray[i])
+  //  i++
+
+  function highLightRed(){
+    console.log('hit red!')
+    setRedActive(true)
+    setYellowActive(false)
+    setGreenActive(false)
+    setBlueActive(false)
   }
 
-  flashingPattern()
+  function highLightYellow(){
+    console.log('hit yellow!')
+    setRedActive(false)
+    setYellowActive(true)
+    setGreenActive(false)
+    setBlueActive(false)
+  }
+
+  function highLightGreen(){
+    console.log('hit green!')
+    setRedActive(false)
+    setYellowActive(false)
+    setGreenActive(true)
+    setBlueActive(false)
+  }
+
+  function highLightBlue(){
+    console.log('hit blue!')
+    setRedActive(false)
+    setYellowActive(false)
+    setGreenActive(false)
+    setBlueActive(true)
+}
+
+  const pause = () => {
+    return new Promise(res => setTimeout(res, 2000))
+  }
+    
+  const loop = async () => {
+    const intervalDelay = colourArray.length * 2000
+    for(let i = 0; i < colourArray.length; i++){
+      await pause()
+      if (colourArray[i] === 'Red') {
+        highLightRed()
+        // setInterval(()=> {
+        //   highLightRed()
+        // }, intervalDelay)
+      
+      } else if (colourArray[i] === 'Yellow') {
+        highLightYellow()
+        // setInterval(() => {
+        //   highLightYellow()
+        // }, intervalDelay)
+        
+        
+      } else if (colourArray[i] === 'Green') {
+        highLightGreen()
+        // setInterval(() => {
+        //   highLightGreen()
+        // }, intervalDelay)
+       
+        
+      } else if (colourArray[i] === 'Blue') {
+        highLightBlue()
+        // setInterval(() => {
+        //   highLightBlue()
+        // }, intervalDelay)
+        
+        
+      } else return
+
+    }}
+
+  
+  
+
+  const flashingPattern = () => {
+
+    setTimeout(loop, 1000 )
+     
+    }
+  
+    // loop() // Start the loop
+  
+  // flashingPattern();
+
+  useEffect(()=>{
+    loop()
+  },[])
 
   return (
     <div className='content-stack'>
@@ -33,7 +135,7 @@ function SVGpattern() {
       </defs>
 
       <path id="green" className={`fill-green button active-shadow`} d="m339.23,360c-77.37,100-154.74,200-232.11,300h200.54c77.37-100,154.74-200,232.11-300-66.85,0-133.7,0-200.55,0Z" />
-          <g id="green-overlay" className="overlay" >
+          <g id="green-overlay" className={`overlay ${greenActive ? 'show' : 'hide'}`} >
             <path d="m403.71,366.54l15.68,20.44c-.02-.13-.05-.26-.08-.39-.48-2.74-.67-5.37-.61-7.9l-14.31-18.65c-.48,2.33-.67,4.53-.69,6.49Z"/>
             <path d="m403.74,368.21c.18,4.39,1.14,7.29,1.16,7.35l.98,2.84,19.51,25.44c-2.28-4.37-4.32-9.39-5.53-14.6l-16.13-21.02Z"/>
             <path d="m388.28,414.39c-4.16,7.92-10.34,11.52-16.85,14.18-7.25,2.97-14.36,2.25-18.09,1.5,10.89,5.71,23.73,3.8,31.31-1.56,16.86-11.94,9.73-30.95,6.49-37.59.83,3.3,2.56,13.14-2.86,23.47Z"/>
@@ -142,8 +244,7 @@ function SVGpattern() {
             <path d="m356.71,399.54c-4.09,3.38-8.75,3.22-11.77,2.73-4.74-.77-6.86-1.72-11.27-6.48-5.9-6.37-4.25-15.13-3.49-18-2.44,3.61-6.17,11.98,1.84,22.42,3.29,4.29,8.46,7.21,13.83,7.81,5.35.6,10.53-1.03,14.99-4.72,16.15-13.36,5.1-35-.1-43.3-1.8,0-3.61,0-5.41,0,2.75,4.09,16.81,26.77,1.39,39.53Z"/>
           </g>
         <path id="red" className={`fill-red button active-shadow`} d="m539.77,360c-77.57-100.33-155.14-200.66-232.71-301H106.51l232.72,301c66.85,0,133.7,0,200.55,0Z" />
-        {/* {className={`fill-red button ${redActive ? 'active' : 'inactive'}`} */}
-          <g id="red-overlay" className="overlay" >
+          <g id="red-overlay" className={`overlay ${redActive ? 'show' : 'hide'}`} >
             <path d="m411.24,215.34l12.49,16.28c.04-.82.12-1.65.26-2.49.2-1.22.43-2.44.69-3.66l-12.32-16.06c-.62,2.1-.96,4.12-1.12,5.93Z"/>
             <path d="m411.93,225.27l14.05,18.31c-1.21-2.84-2.24-6.4-2.29-10.38l-12.55-16.36c-.16,3.61.32,6.13.38,6.41l.41,2.01Z"/>
             <path d="m448.99,257.15l-14.31-18.65c-.48,2.33-.67,4.53-.69,6.49l15.68,20.44c-.02-.13-.05-.26-.08-.39-.48-2.74-.67-5.37-.61-7.9Z"/>
@@ -204,7 +305,7 @@ function SVGpattern() {
             <path d="m408.46,220.33c-1.73-6.57-2.64-16.62,3.97-25.05-.93-1.2-1.86-2.4-2.78-3.6-2.59,3.49-4.11,7.45-4.76,11.41-1.19,7.3,1.48,13.62,3.57,17.24Z"/>
           </g>
         <polygon id="yellow" className={`fill-yellow button active-shadow`} points="488.23 478.91 550.86 660 718 660 510.28 59 347.51 59 580.23 360 488.23 478.91" />
-          <g id="yellow-overlay" className="overlay" >
+          <g id="yellow-overlay" className={`overlay ${yellowActive ? 'show' : 'hide'}`} >
             <path d="m515.92,132.46c-1.7-8.78-5.7-27.14-5.7-27.14,0,0-4.03,10.02-13.58,11.05s-18.93-2.49-18.93-2.49l42.92,55.95s-3.02-28.58-4.71-37.36Zm-15.38-7.73c-4.05.78-9.02-1.9-9.02-1.9,0,0,4.68.81,8.6-.29,5.18-1.46,6.35-4.87,6.35-4.87,0,0,.66,5.79-5.92,7.06Zm4.62,9.96c-3.16.53-7.13-1.74-7.13-1.74,0,0,3.7.76,6.74-.03,4.04-1.04,4.87-3.73,4.87-3.73,0,0,.66,4.64-4.48,5.5Zm3.53,3.95l4.18,13.66-7.16-12.62,2.99-1.03Z"/>
             <path d="m529.13,205.18c.2-1.21.47-2.38.8-3.52l-61.74-80.48-3.57,2.74,64.25,83.75c.04-.82.12-1.65.26-2.49Z"/>
             <path d="m463.83,124.53l-3.57,2.74,70.86,92.37c-1.21-2.84-2.24-6.4-2.29-10.38l-65-84.73Z"/>
@@ -304,7 +405,7 @@ function SVGpattern() {
             <path d="m443.57,64.68c10.89,5.71,23.73,3.8,31.31-1.56,1.83-1.3,3.37-2.68,4.67-4.12h-9.89c-2.52,1.73-5.23,3.04-8,4.17-7.25,2.97-14.36,2.25-18.09,1.5Z"/>
           </g>
         <polygon id="blue" className={`fill-blue button active-shadow`} points="239.22 282.97 81 78.32 81 359.5 239.22 359.5 239.22 282.97" />
-          <g id="blue-overlay" className="overlay" >
+          <g id="blue-overlay" className={`overlay ${blueActive ? 'show' : 'hide'}`} >
             <path d="m87.97,115.95l15.68,20.44c-.02-.13-.05-.26-.08-.39-.48-2.74-.67-5.37-.61-7.9l-14.31-18.65c-.48,2.33-.67,4.53-.69,6.49Z"/>
             <path d="m88,117.63c.18,4.39,1.14,7.29,1.16,7.35l.98,2.84,19.51,25.44c-2.28-4.37-4.32-9.39-5.53-14.6l-16.13-21.02Z"/>
             <path d="m167.48,287.59c-4.16,7.92-10.34,11.52-16.85,14.18-7.25,2.97-14.36,2.25-18.09,1.5,10.89,5.71,23.73,3.8,31.31-1.56,16.86-11.94,9.73-30.95,6.49-37.59.83,3.3,2.56,13.14-2.86,23.47Z"/>
@@ -347,5 +448,6 @@ function SVGpattern() {
     </div>
   )
 }
+
 
 export default SVGpattern
