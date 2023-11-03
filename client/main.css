@@ -48,9 +48,9 @@ body {
   fill: #99c1e9;
 }
 
-.overlay {
+/* .overlay {
   fill: none;
-}
+} */
 
 .overlay:hover {
   fill: #000;
@@ -70,4 +70,12 @@ body {
 
 .overlay:hover + #yellow {
   filter: url(#drop-shadow);
+}
+
+.hide {
+  fill: none;
+}
+
+.show{
+  fill: #000;
 }
